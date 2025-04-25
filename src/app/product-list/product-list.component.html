@@ -1,0 +1,38 @@
+<div class="container">
+    <h2>🛍️ Product Listing</h2>
+  
+    <div class="search-box">
+      <input
+        type="text"
+        placeholder="Search products..."
+        [(ngModel)]="searchTerm"
+      />
+  
+      <ul *ngIf="suggestions.length" class="suggestions">
+        <li *ngFor="let suggestion of suggestions" (click)="selectSuggestion(suggestion)">
+          {{ suggestion }}
+        </li>
+      </ul>
+    </div>
+  
+    <div class="product-grid">
+      <div class="product-card" *ngFor="let product of paginatedProducts">
+        <img [src]="product.image" [alt]="product.name" />
+        <div class="details">
+          <h4>{{ product.name }}</h4>
+          <p>{{ product.category }}</p>
+          <span>₹{{ product.price }}</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="pagination">
+      <button
+        *ngFor="let page of totalPages"
+        [class.active]="page === currentPage"
+        (click)="changePage(page)">
+        {{ page }}
+      </button>
+    </div>
+  </div>
+  
